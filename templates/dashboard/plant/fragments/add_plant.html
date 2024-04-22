@@ -1,0 +1,41 @@
+{% from "./components/ui/input.html" import input %}
+
+<tr>
+    <form  hx-post=""
+           hx-target="closest tr"
+           hx-ext="json-enc"
+           hx-swap="outerHTML">
+        <td>0</td>
+        <td>
+            {{ input(id='name', name='name', label='Plant Name', type="text", required=true) }}
+        </td>
+
+        <td>
+            {{ input(id='species', name='species', label='Plant Species', type="text", required=true) }}
+        </td>
+
+        <td>
+            {{ input(id='description', name='description', label='Plant Description', type="text", required=true) }}
+        </td>
+
+        <td>
+            {{ input(id='image_url', name='image_url', label='Plant Image', type="text", required=true) }}
+        </td>
+
+        <td>
+            <button type="submit" class="hover:text-green-600 p-4 transition-colors">
+                <i class="fa-solid fa-check"></i>
+            </button>
+        </td>
+        <td>
+            <button hx-get="fragments/cancel-add-row"
+                    hx-target="closest tr"
+                    hx-swap="delete"
+                    type="button"
+                    class="hover:text-red-600 p-4 transition-colors"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </td>
+    </form>
+</tr>
