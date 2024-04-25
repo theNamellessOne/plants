@@ -67,8 +67,9 @@ class PlantRepository:
             return None
 
         db_favorites = self.session.query(Favorite).filter(Favorite.plant_id == item_id).first()
-        for db_favorite in db_favorites:
-            self.session.delete(db_favorite)
+        if db_favorites is not None:
+            for db_favorite in db_favorites:
+                self.session.delete(db_favorite)
 
         self.session.delete(db_plant)
         self.session.commit()
