@@ -9,10 +9,19 @@
         <div class="relative w-full lg:w-1/2 group">
             <img class="w-full object-cover h-full" src="{{ plant.image_url }}" alt="{{ plant.name }}">
 
-            <button class="absolute group/like top-3 right-3 w-[40px] h-[40px] bg-background
-                           flex items-center justify-center">
-                <i class="fa-solid fa-heart text-2xl group-hover/like:text-accent transition-colors"></i>
-            </button>
+            {% if principal %}
+                <button hx-post="/favorites/{{ plant.id }}"
+                        hx-target="#body"
+                        hx-swap="beforeend"
+                        class="absolute group/like top-3 right-3 w-[40px] h-[40px] bg-background flex items-center justify-center">
+                    <i class="fa-solid fa-heart text-2xl group-hover/like:text-accent transition-colors"></i>
+                </button>
+            {% else %}
+                <a href="/auth/login" class="absolute group/like top-3 right-3 w-[40px] h-[40px] bg-background flex items-center justify-center">
+                    <i class="fa-solid fa-heart text-2xl group-hover/like:text-accent transition-colors"></i>
+                </a>
+            {% endif %}
+
 
             <div class="absolute bottom-2 left-2 right-2 p-4 bg-background">
                 <h2 class="text-xl">{{ plant.name }}</h2>

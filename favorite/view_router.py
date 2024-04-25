@@ -21,7 +21,6 @@ def favorites_view(request: Request,
                    favorite_service: FavoriteService = Depends(get_favorite_service),
                    principal=Depends(with_auth(admin_only=False))):
     data = favorite_service.fetch_by_user_id(principal['id'], page_size, page_number)
-    print(data)
     plants = list(map(lambda x: x.plant, data.items))
     return templates.TemplateResponse("favorite/favorite-list.html",
                                       {

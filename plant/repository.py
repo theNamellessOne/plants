@@ -4,6 +4,7 @@ from typing import Optional
 
 from comment.model import Comment
 from database import get_db
+from favorite.model import Favorite
 from util.filtering import search_and_sort
 
 from plant.model import Plant
@@ -64,6 +65,10 @@ class PlantRepository:
 
         if not db_plant:
             return None
+
+        db_favorites = self.session.query(Favorite).filter(Favorite.plant_id == item_id).first()
+        for db_favorite in db_favorites:
+            self.session.delete(db_favorite)
 
         self.session.delete(db_plant)
         self.session.commit()
